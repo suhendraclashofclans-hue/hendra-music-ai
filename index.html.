@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hendra Music AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b0b12;color:#fff;font-family:Arial,sans-serif}
+header{padding:22px 18px;border-bottom:1px solid #292936}
+.logo{font-size:24px;font-weight:bold}
+.logo span{color:#b68aff}
+main{max-width:700px;margin:auto;padding:24px 18px}
+h1{font-size:30px;margin-bottom:8px}
+.sub{color:#aaa;line-height:1.5}
+.card{background:#171721;border:1px solid #30303d;border-radius:18px;padding:18px;margin-top:22px}
+label{display:block;margin:15px 0 8px;font-weight:bold}
+textarea,input,select{width:100%;padding:13px;border-radius:10px;border:1px solid #414152;background:#101018;color:white;font-size:15px}
+textarea{height:110px;resize:vertical}
+button{border:0;border-radius:12px;padding:14px;font-size:15px;font-weight:bold;cursor:pointer}
+.generate{width:100%;margin-top:18px;background:linear-gradient(90deg,#a66cff,#e26bc5);color:#fff}
+.note{font-size:12px;color:#aaa;line-height:1.6}
+.result{display:none;margin-top:18px;padding:14px;background:#222231;border-radius:12px}
+footer{text-align:center;padding:30px;color:#777;font-size:12px}
+</style>
+</head>
+<body>
+<header><div class="logo">🎵 Hendra <span>Music AI</span></div></header>
+<main>
+<h1>Buat musik impianmu.</h1>
+<p class="sub">Ubah ide dan imajinasimu menjadi konsep lagu dengan bantuan AI.</p>
+<div class="card">
+<label>Judul lagu</label>
+<input id="judul" placeholder="Contoh: Kau Bahagia Aku Terluka">
+<label>Deskripsi musik</label>
+<textarea id="prompt" placeholder="Ceritakan tema lagu, suasana, instrumen, dan gaya vokal yang kamu inginkan..."></textarea>
+<label>Genre musik</label>
+<select id="genre">
+<option>Pop Indonesia</option>
+<option>Pop Rock</option>
+<option>Akustik</option>
+<option>Dangdut</option>
+<option>R&B</option>
+<option>Lo-fi</option>
+<option>EDM</option>
+<option>Balada sedih</option>
+</select>
+<label>Jenis vokal</label>
+<select id="vokal">
+<option>Vokal pria</option>
+<option>Vokal wanita</option>
+<option>Duet pria dan wanita</option>
+<option>Instrumental tanpa vokal</option>
+</select>
+<button class="generate" onclick="buatPrompt()">✨ Siapkan Konsep Lagu</button>
+<div class="result" id="hasil">
+<strong>Konsep musik kamu</strong>
+<p id="isi"></p>
+<button onclick="salin()">Salin konsep</button>
+</div>
+<p class="note">Versi awal: pembuat konsep musik. Generasi audio AI belum aktif dan nantinya memerlukan integrasi layanan AI musik.</p>
+</div>
+</main>
+<footer>Hendra Music AI · Dibuat untuk kreativitas musik</footer>
+<script>
+function buatPrompt(){
+const judul=document.getElementById('judul').value.trim()||'Tanpa judul';
+const deskripsi=document.getElementById('prompt').value.trim();
+const genre=document.getElementById('genre').value;
+const vokal=document.getElementById('vokal').value;
+document.getElementById('isi').textContent=
+'Judul: '+judul+'. Genre: '+genre+'. Vokal: '+vokal+'. Tema dan arahan: '+(deskripsi||'Buat lagu yang emosional, melodis, dan mudah diingat.')+'.';
+document.getElementById('hasil').style.display='block';
+}
+function salin(){
+const teks=document.getElementById('isi').textContent;
+if(navigator.clipboard){navigator.clipboard.writeText(teks).then(()=>alert('Konsep berhasil disalin!')).catch(()=>alert(teks));}
+else{alert(teks);}
+}
+</script>
+</body>
+</html>
